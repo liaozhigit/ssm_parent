@@ -17,7 +17,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
         <property name="protocol" value="smtp"/>
         <property name="username" value="18682146878@qq.com"/>
         <!--  这里的是你通过短信后，获取的授权码 -->
-		<!-- 邮箱授权密码-->
+		<!-- 邮箱授权密码 -->
         <property name="password" value="rracyxzennnsbgga"/>
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="javaMailProperties">  
