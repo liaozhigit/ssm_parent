@@ -11,13 +11,14 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 		<property name="transactionManager" ref="txManager" />
 		<property name="databaseSchemaUpdate" value="true" />
 		<property name="jobExecutorActivate" value="false" />
-		
+		<!-- 取消 随流程引擎启动部署流程图配置
 		<property name="deploymentResources">
 		 <list> 
 		 <value>classpath:diagrams/helloworldMyProcess.bpmn</value> 
 		 <value>classpath:diagrams/helloworldMyProcess.png</value> 
 		</list> 
 		</property>
+		-->
 		
 
 	</bean>
