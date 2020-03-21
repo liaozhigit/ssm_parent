@@ -197,8 +197,6 @@ public class ItemController {
 			};
 		new Timer().schedule(new MyTimerTask(), 2000);*/
 		return "redirect:/items/list";
-
-
 	}
 
 	@RequestMapping("/delAll")
