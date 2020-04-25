@@ -53,6 +53,7 @@ public class ItemController {
 	@Autowired
 	private ITaskOperateService taskOperateService;
 
+	public static final String IMG_PATH ="D:\\javaData\\ssm\\ssm_parent\\images\\";
 	//@RequestMapping(value="/list", method=RequestMethod.GET)
 	@RequestMapping("/list")
 	public ModelAndView itemsList() throws Exception{
@@ -65,7 +66,6 @@ public class ItemController {
 //			customException.setMessage("对不起哦, 您已经抢购过, 不要太贪心哦!");
 //			throw customException;
 //		}
-
 		List<Items> list = itmeService.list();
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -114,7 +114,7 @@ public class ItemController {
 			//2. 使用随机生成的字符串+源图片扩展名组成新的图片名称,防止图片重名
 			String newfileName = UUID.randomUUID().toString() + fileStr.substring(fileStr.lastIndexOf("."));
 			//3. 将图片保存到硬盘
-			pictureFile.transferTo(new File("E:\\image\\" + newfileName));
+			pictureFile.transferTo(new File(IMG_PATH + newfileName));
 			//4.将图片名称保存到数据库
 			item.setPic(newfileName);
 		}
@@ -161,7 +161,7 @@ public class ItemController {
 			//2. 使用随机生成的字符串+源图片扩展名组成新的图片名称,防止图片重名
 			String newfileName = UUID.randomUUID().toString() + fileStr.substring(fileStr.lastIndexOf("."));
 			//3. 将图片保存到硬盘
-			pictureFile.transferTo(new File("E:\\image\\" + newfileName));
+			pictureFile.transferTo(new File(IMG_PATH + newfileName));
 			//4.将图片名称保存到数据库
 			item.setPic(newfileName);
 		}
@@ -170,7 +170,7 @@ public class ItemController {
 //		vo.setItems(items);
 //		this.search(vo);
 		Map<String,Object> variables = new HashMap<String,Object>();
-		processOperateService.createProcessInstance("helloworldMyProcess", businesskey, variables);
+		processOperateService.createProcessInstance("helloworld", businesskey, variables);
 		MailVO mailVo =new MailVO();
 		mailVo.setSubject(item.getName());
 		mailVo.setContent(item.getDetail());
@@ -238,8 +238,4 @@ public class ItemController {
 		return items;
 	}
 
-    public void test5(){};
-	public void test6(){};
-	public void test10(){};
-	public void test11(){};
 }

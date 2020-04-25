@@ -30,7 +30,8 @@ public class LoginController {
 		}
 		
 		//跳转到列表页
-	//	return "redirect:/items/list";
-		return "redirect:/items/add";
+		return "redirect:/items/list";
+	//	return "redirect:/items/add";
+
 	}
 }
