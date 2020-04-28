@@ -2,13 +2,11 @@ package cn.liaozhi.service.impl;
 
 import java.util.List;
 
-import cn.liaozhi.controller.ItemController;
 import cn.liaozhi.core.util.JsonUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cn.liaozhi.dao.ItemsMapper;
 import cn.liaozhi.pojo.Items;
 import cn.liaozhi.pojo.ItemsExample;
