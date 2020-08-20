@@ -6,4 +6,7 @@ package cn.liaozhi.controller;
  * @Version 1.0
  */
 public class TestController {
+    int age;
+    String name;
+
 }
