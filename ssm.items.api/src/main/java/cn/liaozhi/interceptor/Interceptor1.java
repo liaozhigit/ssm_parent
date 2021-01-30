@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-public class Interceptor1 implements HandlerInterceptor {
+public class  Interceptor1 implements HandlerInterceptor {
 
 	//执行时机:controller已经执行,modelAndview已经返回
 	//使用场景: 记录操作日志,记录登录用户的ip,时间等.

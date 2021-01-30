@@ -23,8 +23,8 @@ public class ItemsServiceImpl implements ItemService {
 		//如果不需要任何查询条件,直接将example对象new出来即可
 		ItemsExample example = new ItemsExample();
 		List<Items> list = itemsMapper.selectByExampleWithBLOBs(example);
-		log.info("fastjson============"+JSON.toJSONString(list));
-		log.info(JsonUtil.objectToJson(list));
+	//	log.info("fastjson============"+JSON.toJSONString(list));
+	//	log.info(JsonUtil.objectToJson(list));
 		return list;
 	}
 

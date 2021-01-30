@@ -124,6 +124,12 @@
 	</td>
 	<td><input type="text" name="itemsList[${status.index }].name" value="${item.name }"/></td>
 	<td><input type="text" name="itemsList[${status.index }].price" value="${item.price }"/></td>
+	<td>
+	<c:if test="${item.pic !=null}">
+		<img name="itemsList[${status.index }].pic" src="/pic/${item.pic}" width=100 height=100/>
+	</c:if>
+					
+	</td>
 	<td><input type="text" name="itemsList[${status.index }].createtime" 
 			   value="<fmt:formatDate value="${item.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/>"/></td>
 	<td><input type="text" name="itemsList[${status.index }].detail" value="${item.detail }"/></td>

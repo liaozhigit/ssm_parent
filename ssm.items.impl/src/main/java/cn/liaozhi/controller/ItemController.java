@@ -53,7 +53,8 @@ public class ItemController {
 	@Autowired
 	private ITaskOperateService taskOperateService;
 
-	public static final String IMG_PATH ="D:\\javaData\\ssm\\ssm_parent\\images\\";
+	//public static final String IMG_PATH ="D:\\javaData\\ssm\\ssm_parent\\images\\";
+	public static final String IMG_PATH ="E:\\image\\";
 	//@RequestMapping(value="/list", method=RequestMethod.GET)
 	@RequestMapping("/list")
 	public ModelAndView itemsList() throws Exception{
@@ -169,12 +170,12 @@ public class ItemController {
 //		QueryVo vo = new QueryVo();
 //		vo.setItems(items);
 //		this.search(vo);
-		Map<String,Object> variables = new HashMap<String,Object>();
-		processOperateService.createProcessInstance("helloworld", businesskey, variables);
-		MailVO mailVo =new MailVO();
-		mailVo.setSubject(item.getName());
-		mailVo.setContent(item.getDetail());
-		baseMailService.sendMail(mailVo);
+//		Map<String,Object> variables = new HashMap<String,Object>();
+//		processOperateService.createProcessInstance("helloworld", businesskey, variables);
+//		MailVO mailVo =new MailVO();
+//		mailVo.setSubject(item.getName());
+//		mailVo.setContent(item.getDetail());
+//		baseMailService.sendMail(mailVo);
 		  /*class MyTimerTask  extends   TimerTask{
 
 				@Override
