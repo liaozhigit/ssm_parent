@@ -48,7 +48,17 @@
 
 		</dependencies>
 	</dependencyManagement>
-
+    <modules>
+		<module>ssm.items.api</module>
+		<module>ssm.items.impl</module>
+		<module>ssm.workflow.impl</module>
+		<module>ssm.workflow.api</module>
+		<module>ssm.web</module>
+		<module>ssm.mail.api</module>
+		<module>ssm.mail.impl</module>
+		<module>ssm.core</module>
+		<module>ssm.web.resource</module>
+	</modules>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -457,15 +467,32 @@
 			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
+	<!-- Maven仓库定义 -->
+	<repositories>
+        <repository>
+            <id>central</id>
+            <url>http://maven.oschina.net/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>nexus-osc-thirdparty</id>
+            <url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+        </repository>
 
-	<modules>
-		<module>ssm.items.api</module>
-		<module>ssm.items.impl</module>
-		<module>ssm.workflow.impl</module>
-		<module>ssm.workflow.api</module>
-		<module>ssm.web</module>
-		<module>ssm.mail.api</module>
-		<module>ssm.mail.impl</module>
-		<module>ssm.core</module>
-	</modules>
+        <!-- Activiti的仓库 -->
+		<repository>
+			<id>Activiti</id>
+			<url>https://maven.alfresco.com/nexus/content/repositories/activiti</url>
+		</repository>
+
+		<repository>
+			<id>Alfresco</id>
+			<url>https://maven.alfresco.com/nexus/content/repositories/public</url>
+		</repository>
+
+		<!-- Mulesoft的仓库 -->
+		<repository>
+			<id>Mulesoft</id>
+			<url>https://repository-master.mulesoft.org/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
 </project>
