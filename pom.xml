@@ -48,7 +48,7 @@
 
 		</dependencies>
 	</dependencyManagement>
-    <modules>
+	<modules>
 		<module>ssm.items.api</module>
 		<module>ssm.items.impl</module>
 		<module>ssm.workflow.impl</module>
@@ -57,7 +57,6 @@
 		<module>ssm.mail.api</module>
 		<module>ssm.mail.impl</module>
 		<module>ssm.core</module>
-		<module>ssm.web.resource</module>
 	</modules>
 	<dependencies>
 		<dependency>
@@ -165,20 +164,15 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<!-- aspectJ的开发包 start-->
+		<!-- aspectJ的开发包 start -->
 		<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-aspects</artifactId>
-				<version>${spring.version}</version>
-	    </dependency>
-
-		<!-- spring-aspects 已包含 aopalliance
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>1.6.8</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
-		-->
+
+		<!-- spring-aspects 已包含 aopalliance <dependency> <groupId>org.aspectj</groupId> 
+			<artifactId>aspectjweaver</artifactId> <version>1.6.8</version> </dependency> -->
 
 		<!-- aspectJ的开发包 end -->
 
@@ -189,13 +183,8 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-		<!-- spring-aop 已包含 aopalliance
-		<dependency>
-			<groupId>aopalliance</groupId>
-			<artifactId>aopalliance</artifactId>
-			<version>1.0</version>
-		</dependency>
-		-->
+		<!-- spring-aop 已包含 aopalliance <dependency> <groupId>aopalliance</groupId> 
+			<artifactId>aopalliance</artifactId> <version>1.0</version> </dependency> -->
 
 		<!-- spring的传统AOP的开发的包 end -->
 
@@ -439,7 +428,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>ssh_parent</finalName>
+		<finalName>ssm.web</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -455,6 +444,15 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+
+			</resource>
+		</resources>
 	</build>
 
 	<distributionManagement>
@@ -469,16 +467,16 @@
 	</distributionManagement>
 	<!-- Maven仓库定义 -->
 	<repositories>
-        <repository>
-            <id>central</id>
-            <url>http://maven.oschina.net/content/groups/public/</url>
-        </repository>
-        <repository>
-            <id>nexus-osc-thirdparty</id>
-            <url>http://maven.oschina.net/content/repositories/thirdparty/</url>
-        </repository>
+		<repository>
+			<id>central</id>
+			<url>http://maven.oschina.net/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>nexus-osc-thirdparty</id>
+			<url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+		</repository>
 
-        <!-- Activiti的仓库 -->
+		<!-- Activiti的仓库 -->
 		<repository>
 			<id>Activiti</id>
 			<url>https://maven.alfresco.com/nexus/content/repositories/activiti</url>

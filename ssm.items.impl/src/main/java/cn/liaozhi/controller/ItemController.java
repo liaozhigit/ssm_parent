@@ -25,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,19 +90,43 @@ public class ItemController {
 	 *中的变量名称相同
 	 */
 	@RequestMapping("/itemEdit/{id}")
-	public String itemEdit(@PathVariable("id") Integer id, HttpServletRequest reuqest,
+	public ModelAndView itemEdit(@PathVariable("id") Integer id, HttpServletRequest reuqest,
 						   Model model) throws Exception{
-
+		 ModelAndView mv = new ModelAndView();
+		 mv.setViewName("editItem");
 		//String idStr = reuqest.getParameter("id");
 		Items item = itmeService.findItemsById(id);
+		
+		  mv.addObject("id",item.getId());
+		   mv.addObject("name",item.getName());
+		   mv.addObject("price",item.getPrice());
+		   mv.addObject("pic",item.getPic());
+		   mv.addObject("detail",item.getDetail());
+		   Date createtime = item.getCreatetime();
+		   mv.addObject("createtime",new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(createtime));
+		   String img_name = "/pic/"+item.getPic();
+		   mv.addObject("img_name",img_name); 
+		   return mv;
+		
 
 		//Model模型:模型中放入了返回给页面的数据
 		//model底层其实就是用的request域来传递数据,但是对request域进行了扩展.
-		model.addAttribute("item", item);
+		//model.addAttribute("item", item);
 
 		//如果springMvc方法返回一个简单的string字符串,那么springMvc就会认为这个字符串就是页面的名称
-		return "editItem";
+	//	return "editItem";
 	}
+	
+	
+	@RequestMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id, HttpServletRequest reuqest,
+						   Model model) throws Exception{
+		    itmeService.delete(id);
+		   return "redirect:/items/list";
+
+		
+	}
+	
 
 	//springMvc可以直接接收基本数据类型,包括string.spirngMvc可以帮你自动进行类型转换.
 	//controller方法接收的参数的变量名称必须要等于页面上input框的name属性值
@@ -110,12 +136,21 @@ public class ItemController {
 	//public String update(Integer id, String name, Float price, String detail) throws Exception{
 	public String update(MultipartFile pictureFile ,Items item, Model model, HttpServletRequest request) throws Exception{
 		if(pictureFile.getSize()>0){
+			/**
+1.后台获取待上传图片的保存路径
+（1）在WebContent（使用eclipse的情况下，若使用的IDE为MyEclipse，则为WebRoot）下创建一个保存图片的文件夹，
+如：uploadPic，待web项目在服务器上启动后，服务器上就会有对应的文件夹目录存在。
+（2）为处理图片上传的方法给定一个参数：request，参数类型为：HttpServletRequest
+（3）在处理图片上传的方法中用以下方式获取服务器中保存图片的文件夹路径：
+			 */
+			String pic_path = request.getSession().getServletContext().getRealPath("uploadPic");  
+			log.info("updateitem pic_path=========================="+pic_path);
 			//1. 获取图片完整名称
 			String fileStr = pictureFile.getOriginalFilename();
 			//2. 使用随机生成的字符串+源图片扩展名组成新的图片名称,防止图片重名
 			String newfileName = UUID.randomUUID().toString() + fileStr.substring(fileStr.lastIndexOf("."));
 			//3. 将图片保存到硬盘
-			pictureFile.transferTo(new File(IMG_PATH + newfileName));
+			pictureFile.transferTo(new File(pic_path +"/"+ newfileName));
 			//4.将图片名称保存到数据库
 			item.setPic(newfileName);
 		}
@@ -144,18 +179,60 @@ public class ItemController {
 
 	//如果Controller中接收的是Vo,那么页面上input框的name属性值要等于vo的属性.属性.属性.....
 	@RequestMapping("/search")
-	public String search(QueryVo vo) throws Exception{
+	public ModelAndView search(Items item) throws Exception{
+		
+		List<Items> itemList =itmeService.findItems(item);
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		modelAndView.addObject("itemList", itemList);
+		modelAndView.setViewName("itemList");
+		return modelAndView;
+	}
+	
+	@RequestMapping("/updateAll")
+	public String updateAll(QueryVo vo) throws Exception{
 		log.info(vo);
-		return "";
+		return "itemList";
 	}
 
 	@RequestMapping("/add")
 	public String add(Items item) throws Exception{
 		return "addItem";
 	}
-
+	
 	@RequestMapping("/save")
-	public String save(MultipartFile pictureFile,Items item) throws Exception{
+	public  String save(MultipartFile pictureFile,HttpServletRequest request,Items item) throws Exception{
+		String pic_path = request.getSession().getServletContext().getRealPath("uploadPic"); 
+		log.info("save pic_path=========================="+pic_path);
+			//获取上传文件的原始名称
+			String originalFilename = pictureFile.getOriginalFilename();
+			// 上传图片
+			if ( originalFilename != null && originalFilename.length() > 0) {
+					//2. 使用随机生成的字符串+源图片扩展名组成新的图片名称,防止图片重名
+					String newfileName = UUID.randomUUID().toString() + originalFilename.substring(originalFilename.lastIndexOf("."));
+					//3. 将图片保存到硬盘
+					pictureFile.transferTo(new File(pic_path +"/"+ newfileName));
+					//4.将图片名称保存到数据库
+					item.setPic(newfileName);
+			}
+			String businesskey = itmeService.insertItems(item);
+//			QueryVo vo = new QueryVo();
+//			vo.setItems(item);
+//			this.search(vo);
+//			Map<String,Object> variables = new HashMap<String,Object>();
+//			processOperateService.createProcessInstance("helloworld", businesskey, variables);
+//			MailVO mailVo =new MailVO();
+//			mailVo.setSubject(item.getName());
+//			mailVo.setContent(item.getDetail());
+//			baseMailService.sendMail(mailVo);
+			return "redirect:/items/list";
+		
+	}
+	
+
+
+	public String uploadFile(MultipartFile pictureFile,Items item) throws Exception{
 		if(pictureFile.getSize()>0){
 			//1. 获取图片完整名称
 			String fileStr = pictureFile.getOriginalFilename();
@@ -168,7 +245,7 @@ public class ItemController {
 		}
 		String businesskey = itmeService.insertItems(item);
 //		QueryVo vo = new QueryVo();
-//		vo.setItems(items);
+//		vo.setItems(item);
 //		this.search(vo);
 //		Map<String,Object> variables = new HashMap<String,Object>();
 //		processOperateService.createProcessInstance("helloworld", businesskey, variables);
@@ -176,27 +253,6 @@ public class ItemController {
 //		mailVo.setSubject(item.getName());
 //		mailVo.setContent(item.getDetail());
 //		baseMailService.sendMail(mailVo);
-		  /*class MyTimerTask  extends   TimerTask{
-
-				@Override
-				public void run() {
-
-					try {
-						count = (count+1)%2;
-						MailVO mailVo =new MailVO();
-						mailVo.setSubject("证件办理缴费通知");
-						mailVo.setContent("你好，你已成功缴费，证件办理在进一步办理审核中。");
-						baseMailService.sendMail(mailVo);
-						log.info("MyTimerTask+++++++++++"+new Date().getSeconds());
-						new Timer().schedule(new MyTimerTask(), 2000+2000*count);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				}
-			};
-		new Timer().schedule(new MyTimerTask(), 2000);*/
 		return "redirect:/items/list";
 	}
 
@@ -207,11 +263,7 @@ public class ItemController {
 		return "";
 	}
 
-	@RequestMapping("/updateAll")
-	public String updateAll(QueryVo vo) throws Exception{
-		log.info(vo);
-		return "itemList";
-	}
+	
 
 	//导入jackson的jar包在 controller的方法中可以使用@RequestBody,让spirngMvc将json格式字符串自动转换成java中的pojo
 	//页面json的key要等于java中pojo的属性名称

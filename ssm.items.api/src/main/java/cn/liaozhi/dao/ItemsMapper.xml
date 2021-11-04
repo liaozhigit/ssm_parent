@@ -76,7 +76,7 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		id, name, price, pic, createtime
+		id, name, price, pic, createtime,detail
 	</sql>
 	<sql id="Blob_Column_List">
 		detail

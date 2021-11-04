@@ -11,7 +11,11 @@ public interface ItemService {
 	
 	public Items findItemsById(Integer id) throws Exception;
 	
+	public List<Items> findItems(Items items) throws Exception;
+	
 	public void updateItems(Items items) throws Exception;
+	
+	public void delete(Integer id) throws Exception;
 	
 	public String insertItems(Items items) throws Exception;
 	

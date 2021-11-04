@@ -16,6 +16,12 @@
   	<artifactId>ssm.items.impl</artifactId>
   	<version>${ssm.version}</version>
   	</dependency>
+  	
+  	<dependency>
+			<groupId>cn.liaozhi.ssm</groupId>
+			<artifactId>ssm.web.resource</artifactId>
+			<version>${ssm.version}</version>
+	</dependency>
   </dependencies>
  
 </project>
