@@ -141,7 +141,7 @@
 		pic, createtime, detail
 		)
 		values (#{name,jdbcType=VARCHAR}, #{price,jdbcType=REAL},
-		#{pic,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
+		#{pic,jdbcType=VARCHAR},now(),
 		#{detail,jdbcType=LONGVARCHAR}
 		)
 	</insert>

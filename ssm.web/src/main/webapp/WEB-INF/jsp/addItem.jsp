@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改商品信息</title>
+<title>添加题目信息</title>
 
 </head>
 <body> 
@@ -17,29 +17,31 @@
 		 修改商品信息：
 		<table width="100%" border=1>
 			<tr>
-				<td>商品名称</td>
+				<td>题目名称</td>
 				<td><input type="text" name="name"  /></td>
 			</tr>
 			<tr>
-				<td>商品价格</td>
+				<td>题目序号</td>
 				<td><input type="text" name="price"  /></td>
 			</tr>
 			
-			<tr>
+			<%--<tr>
 				<td>商品生产日期</td>
 				<td><input type="text" name="createtime"/></td>
-			</tr>
+			</tr>--%>
 			
 			<tr>
-				<td>商品图片</td>
+				<td>题目图片</td>
 				<td>
 					<input type="file"  name="pictureFile"/> 
 				</td>
 			</tr>
 			 
 			<tr>
-				<td>商品简介</td>
-				<td><textarea rows="3" cols="30" name="detail"></textarea>
+				<td>题目描述</td>
+				<td>
+					<textarea name="detail" style="overflow-x:hidden; overflow-y:auto; background:#fff; border:0;width:100%" cols="50" rows="30" >
+					</textarea>
 				</td>
 			</tr>
 			<tr>

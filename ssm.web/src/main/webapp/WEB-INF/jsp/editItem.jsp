@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改商品信息</title>
+<title>修改题目信息</title>
 
 </head>
 <body> 
@@ -30,11 +30,11 @@
 				
 			</tr> --%>
 			<input name="pic" value="${pic}" type="hidden"/>
-			<tr>
-				<td>商品生产日期</td>
-				<td><input type="text" name="createtime"
-					value="${createtime}"</td>
-			</tr>
+			<%--<tr>--%>
+				<%--<td>商品生产日期</td>--%>
+				<%--<td><input type="text" name="createtime"--%>
+					<%--value="${createtime}"</td>--%>
+			<%--</tr>--%>
 			
 			<tr>
 				<td>商品图片</td>
@@ -48,8 +48,10 @@
 			</tr>
 			 
 			<tr>
-				<td>商品简介</td>
-				<td><textarea rows="3" cols="30" name="detail">${detail}</textarea>
+				<td>题目描述</td>
+				<td>
+					<textarea name="detail" style="overflow-x:hidden; overflow-y:auto; background:#fff; border:0;width:100%" cols="50" rows="30" >${detail}
+					</textarea>
 				</td>
 			</tr>
 			<tr>

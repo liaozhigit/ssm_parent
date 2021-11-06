@@ -10,7 +10,7 @@ CREATE TABLE `items` (
   `price` float(10,1) NOT NULL COMMENT '商品定价',
   `detail` text COMMENT '商品描述',
   `pic` varchar(64) DEFAULT NULL COMMENT '商品图片',
-  `createtime` datetime NOT NULL COMMENT '生产日期',
+  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '生产日期',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 

@@ -69,12 +69,18 @@ public class ItemController {
 //			customException.setMessage("对不起哦, 您已经抢购过, 不要太贪心哦!");
 //			throw customException;
 //		}
-		List<Items> list = itmeService.list();
-
 		ModelAndView modelAndView = new ModelAndView();
 
-		modelAndView.addObject("itemList", list);
-		modelAndView.setViewName("itemList");
+		try {
+			log.info("========list start==================");
+			List<Items> list = itmeService.list();
+			modelAndView.addObject("itemList", list);
+			modelAndView.setViewName("itemList");
+			log.info("========list end ==================");
+		}catch (Exception e){
+			e.printStackTrace();
+            log.error(e);
+		}
 		return modelAndView;
 	}
 
@@ -203,7 +209,9 @@ public class ItemController {
 	
 	@RequestMapping("/save")
 	public  String save(MultipartFile pictureFile,HttpServletRequest request,Items item) throws Exception{
-		String pic_path = request.getSession().getServletContext().getRealPath("uploadPic"); 
+
+		String pic_path = request.getSession().getServletContext().getRealPath("uploadPic");
+		log.info("======save  start======================");
 		log.info("save pic_path=========================="+pic_path);
 			//获取上传文件的原始名称
 			String originalFilename = pictureFile.getOriginalFilename();
@@ -226,6 +234,7 @@ public class ItemController {
 //			mailVo.setSubject(item.getName());
 //			mailVo.setContent(item.getDetail());
 //			baseMailService.sendMail(mailVo);
+		log.info("======save  end=====================");
 			return "redirect:/items/list";
 		
 	}
