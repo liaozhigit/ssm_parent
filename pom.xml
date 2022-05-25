@@ -11,7 +11,7 @@
 	<!-- 锁定版本 -->
 	<properties>
 		<ssm.version>0.0.1-SNAPSHOT</ssm.version>
-		<spring.version>4.2.4.RELEASE</spring.version>
+		<spring.version>5.2.22.RELEASE</spring.version>
 		<slf4j.version>1.6.6</slf4j.version>
 		<log4j.version>1.2.12</log4j.version>
 		<shiro.version>1.2.3</shiro.version>
